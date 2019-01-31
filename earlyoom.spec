@@ -1,6 +1,6 @@
 Name: earlyoom
 Version: 1.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 URL: https://github.com/rfjakob/%{name}
@@ -50,6 +50,9 @@ sed -e '/systemctl/d' -i Makefile
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Mon Nov 05 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 1.2-1
 - Updated to version 1.2.
 
