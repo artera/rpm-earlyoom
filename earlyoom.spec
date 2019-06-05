@@ -1,6 +1,6 @@
 Name: earlyoom
 Version: 1.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 URL: https://github.com/rfjakob/%{name}
@@ -27,7 +27,7 @@ sed -e '/systemctl/d' -i Makefile
 
 %build
 %set_build_flags
-%make_build
+%make_build VERSION=%{version}
 
 %install
 %make_install PREFIX=%{_prefix} SYSCONFDIR=%{_sysconfdir} SYSTEMDUNITDIR=%{_unitdir}
@@ -50,6 +50,9 @@ sed -e '/systemctl/d' -i Makefile
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Wed Jun 05 2019 Vitaly Zaitsev <vitaly@easycoding.org> - 1.3-2
+- Forwarded version to compiled binary.
+
 * Mon May 27 2019 Vitaly Zaitsev <vitaly@easycoding.org> - 1.3-1
 - Updated to version 1.3.
 
