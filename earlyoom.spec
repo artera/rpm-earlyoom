@@ -1,11 +1,14 @@
 Name: earlyoom
 Version: 1.3
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 License: MIT
 URL: https://github.com/rfjakob/%{name}
 Summary: Early OOM Daemon for Linux
-Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+
+# https://github.com/rfjakob/earlyoom/commit/f2b45e6a18a0624032d289318569ad57c24fd419
+Patch100: %{name}-unit-hardening.patch
 
 %{?systemd_requires}
 BuildRequires: systemd
@@ -50,6 +53,10 @@ sed -e '/systemctl/d' -i Makefile
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Fri Feb 21 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 1.3-4
+- Rebuilt for Fedora 32.
+- Backported security hardening patches.
+
 * Wed Jul 24 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
