@@ -1,14 +1,11 @@
 Name: earlyoom
-Version: 1.3.1
+Version: 1.4
 Release: 1%{?dist}
 
 License: MIT
 URL: https://github.com/rfjakob/%{name}
 Summary: Early OOM Daemon for Linux
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-
-# https://github.com/rfjakob/earlyoom/commit/f2b45e6a18a0624032d289318569ad57c24fd419
-Patch100: %{name}-unit-hardening.patch
 
 %{?systemd_requires}
 BuildRequires: systemd
@@ -53,6 +50,9 @@ sed -e '/systemctl/d' -i Makefile
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Mon Mar 02 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 1.4-1
+- Updated to version 1.4.
+
 * Fri Feb 28 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 1.3.1-1
 - Updated to version 1.3.1.
 
