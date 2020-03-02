@@ -1,0 +1,25 @@
+From fc2856fa9a701b9bbf9481110843e288b0d66351 Mon Sep 17 00:00:00 2001
+From: Yaroslav Sidlovsky <zawertun@otl.ru>
+Date: Mon, 2 Mar 2020 18:25:19 +0300
+Subject: [PATCH] fix for #164
+
+---
+ msg.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/msg.c b/msg.c
+index e67d839..4270eeb 100644
+--- a/msg.c
++++ b/msg.c
+@@ -18,9 +18,9 @@ static void color_log(FILE* f, const char* color, const char* fmt, va_list vl)
+         color = "";
+         reset = "";
+     }
+-    fprintf(f, color);
++    fprintf(f, "%s", color);
+     vfprintf(f, fmt, vl);
+-    fprintf(f, reset);
++    fprintf(f, "%s", reset);
+     // The `reset` control was not flushed out by the
+     // newline as it was sent after. Manually flush
+     // it now to prevent artifacts when stderr and stdout

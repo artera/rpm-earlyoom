@@ -7,6 +7,9 @@ URL: https://github.com/rfjakob/%{name}
 Summary: Early OOM Daemon for Linux
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
+# https://github.com/rfjakob/earlyoom/pull/165
+Patch100: %{name}-arguments-format.patch
+
 %{?systemd_requires}
 BuildRequires: systemd
 BuildRequires: pandoc
