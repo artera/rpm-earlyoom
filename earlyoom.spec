@@ -26,7 +26,7 @@ for it, sitting in front of an unresponsive system.
 
 %prep
 %autosetup -p1
-sed -e '/systemctl/d' -i Makefile
+sed -e '/systemctl/d' -e 's/gzip -f -k .*/gzip -c $< > $@/' -i Makefile
 
 %build
 %set_build_flags
