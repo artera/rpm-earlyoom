@@ -1,6 +1,6 @@
 Name: earlyoom
 Version: 1.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 URL: https://github.com/rfjakob/%{name}
@@ -56,6 +56,9 @@ sed -e '/DynamicUser=/d' -e 's/ProtectSystem=strict/ProtectSystem=full/' -i earl
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Tue Mar 03 2020 Massimiliano Torromeo <massimiliano.torromeo@gmail.com> - 1.4-2
+- fixed systemd unit for el7
+
 * Mon Mar 02 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 1.4-1
 - Updated to version 1.4.
 
