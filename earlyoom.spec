@@ -27,10 +27,13 @@ for it, sitting in front of an unresponsive system.
 %prep
 %autosetup -p1
 sed -e '/systemctl/d' -e 's/gzip -f -k .*/gzip -c $< > $@/' -i Makefile
+%if 0%{?el7}
+sed -e '/DynamicUser=/d' -e 's/ProtectSystem=strict/ProtectSystem=full/' -i earlyoom.service.in
+%endif
 
 %build
 %set_build_flags
-%make_build VERSION=%{version}
+%make_build PREFIX=%{_prefix} SYSCONFDIR=%{_sysconfdir} SYSTEMDUNITDIR=%{_unitdir} VERSION=%{version}
 
 %install
 %make_install PREFIX=%{_prefix} SYSCONFDIR=%{_sysconfdir} SYSTEMDUNITDIR=%{_unitdir}
