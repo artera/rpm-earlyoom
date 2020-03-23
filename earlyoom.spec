@@ -1,14 +1,11 @@
 Name: earlyoom
-Version: 1.4
-Release: 2%{?dist}
+Version: 1.5
+Release: 1%{?dist}
 
 License: MIT
 URL: https://github.com/rfjakob/%{name}
 Summary: Early OOM Daemon for Linux
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-
-# https://github.com/rfjakob/earlyoom/pull/165
-Patch100: %{name}-arguments-format.patch
 
 %{?systemd_requires}
 BuildRequires: systemd
@@ -56,6 +53,9 @@ sed -e '/DynamicUser=/d' -e 's/ProtectSystem=strict/ProtectSystem=full/' -i earl
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Mon Mar 23 2020 Massimiliano Torromeo <massimiliano.torromeo@gmail.com> - 1.5-1
+- Update to version 1.5.
+
 * Tue Mar 03 2020 Massimiliano Torromeo <massimiliano.torromeo@gmail.com> - 1.4-2
 - fixed systemd unit for el7
 
