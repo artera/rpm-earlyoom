@@ -1,5 +1,5 @@
 Name: earlyoom
-Version: 1.5
+Version: 1.6.1
 Release: 1%{?dist}
 
 License: MIT
@@ -53,6 +53,9 @@ sed -e '/DynamicUser=/d' -e 's/ProtectSystem=strict/ProtectSystem=full/' -i earl
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Fri Jul 10 2020 Massimiliano Torromeo <massimiliano.torromeo@gmail.com> - 1.6.1-1
+- Updated to version 1.6.1
+
 * Mon Mar 23 2020 Massimiliano Torromeo <massimiliano.torromeo@gmail.com> - 1.5-1
 - Update to version 1.5.
 
