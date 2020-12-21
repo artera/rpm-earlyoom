@@ -1,6 +1,8 @@
+%global makeflags PREFIX=%{_prefix} SYSCONFDIR=%{_sysconfdir} SYSTEMDUNITDIR=%{_unitdir}
+
 Name: earlyoom
 Version: 1.6.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 URL: https://github.com/rfjakob/%{name}
@@ -25,15 +27,18 @@ for it, sitting in front of an unresponsive system.
 %autosetup -p1
 sed -e '/systemctl/d' -e 's/gzip -f -k .*/gzip -c $< > $@/' -i Makefile
 %if 0%{?el7}
-sed -e '/DynamicUser=/d' -e 's/ProtectSystem=strict/ProtectSystem=full/' -i earlyoom.service.in
+sed -e '/DynamicUser=/d' \
+    -e 's/ProtectSystem=strict/ProtectSystem=full/' \
+    -e 's/MemoryMax=/MemoryLimit=/' \
+    -i earlyoom.service.in
 %endif
 
 %build
 %set_build_flags
-%make_build PREFIX=%{_prefix} SYSCONFDIR=%{_sysconfdir} SYSTEMDUNITDIR=%{_unitdir} VERSION=%{version}
+%make_build VERSION=%{version} %{makeflags}
 
 %install
-%make_install PREFIX=%{_prefix} SYSCONFDIR=%{_sysconfdir} SYSTEMDUNITDIR=%{_unitdir}
+%make_install %{makeflags}
 
 %files
 %doc README.md
